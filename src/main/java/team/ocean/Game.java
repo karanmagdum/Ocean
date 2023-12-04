@@ -87,7 +87,7 @@ public class Game extends Application {
                         randResult.setText(String.valueOf(rand));
                     }
                     //test
-                    player1Turn=true;
+                    player1Turn=false;
                     player2Turn=true;
                 }
         });
