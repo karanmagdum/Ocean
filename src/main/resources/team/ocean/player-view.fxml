@@ -5,11 +5,13 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/fxml/1" xmlns:fx="http://javafx.com/javafx/17.0.2-ea" fx:controller="team.ocean.PlayerController">
    <children>
-      <Label layoutX="90.0" layoutY="75.0" text="Enter Player One name" />
+      <Label layoutX="90.0" layoutY="100.0" text="Enter Player One name" />
       <Label layoutX="90.0" layoutY="150.0" text="Enter Player Two name" />
-      <TextField fx:id="playerOne" layoutX="340.0" layoutY="75.0" />
-      <TextField fx:id="playerTwo" layoutX="340.0" layoutY="150.0" />
+      <TextField fx:id="playerOne" layoutX="370.0" layoutY="100.0" />
+      <TextField fx:id="playerTwo" layoutX="370.0" layoutY="150.0" />
+      <Label layoutX="90.0" layoutY="200.0" text="Enter the Board Layout(Default Grid Length = 10)" />
+      <TextField fx:id="dimension" layoutX="370.0" layoutY="200.0" />
       <Label fx:id="HighScore" layoutX="90.0" layoutY="300.0" text="High Score" />
-      <Button fx:id="beginButton" layoutX="400.0" layoutY="210.0" mnemonicParsing="false" onAction="#onHelloButtonClick" text="Begin" />
+      <Button fx:id="beginButton" layoutX="400.0" layoutY="300.0" mnemonicParsing="false" onAction="#onHelloButtonClick" text="Begin" />
    </children>
 </AnchorPane>

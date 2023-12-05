@@ -22,9 +22,13 @@ public class PlayerController {
     public TextField playerTwo;
 
     @FXML
+    public TextField dimension;
+
+    @FXML
     public Label HighScore;
 
     public static ArrayList<String> names = new ArrayList<>();
+    public static int customGridLength = 10;
 
     @FXML
     private Button beginButton;
@@ -52,6 +56,9 @@ public class PlayerController {
     protected void onHelloButtonClick() throws IOException {
         names.add(playerOne.getText());
         names.add(playerTwo.getText());
+        if(Integer.parseInt(dimension.getText())>10)
+            customGridLength = Integer.parseInt(dimension.getText());
+
         System.out.println(names);
         new Thread(() -> {
             Platform.runLater(this::openGame);

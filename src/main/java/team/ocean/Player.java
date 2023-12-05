@@ -15,6 +15,8 @@ public class Player {
     private int maxRow=10;
     private int maxCol=10;
 
+    private int dimension = 10;
+
     private int score;
 
     public int getScore() {
@@ -54,7 +56,7 @@ public class Player {
         return name;
     }
 
-    public Player( int tileSize, String name){
+    public Player( int tileSize, int dimension,String  name){
         this.tileSize = tileSize;
         this.name = name;
         obj = new Circle((double) tileSize /2);
@@ -62,6 +64,9 @@ public class Player {
         obj.setId("player"+(++count));
         obj.setFill((count%2==0)?Color.BROWN:Color.LIGHTGREEN);
         score = 0;
+        this.dimension = dimension;
+        maxRow=dimension;
+        maxCol=dimension;
     }
 
     public Circle getObj(){
@@ -131,8 +136,8 @@ public class Player {
                 dir = Direction.RIGHT;
                 minRow = 1;
                 minCol = 0;
-                maxRow = 10;
-                maxCol = 10;
+                maxRow = dimension;
+                maxCol = dimension;
             }
         }
 

@@ -15,7 +15,7 @@ class PlayerTest {
 
     @BeforeEach
     void setUp() {
-        player = new Player(Game.TILE_SIZE, "TestPlayer");
+        player = new Player(Game.TILE_SIZE, 10, "TestPlayer");
     }
 
     @Test

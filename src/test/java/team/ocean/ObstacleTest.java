@@ -25,7 +25,7 @@ class ObstacleTest {
 
     @Test
     void testAddFire() throws URISyntaxException {
-        ImageView fireImage = Obstacle.addFire(30, 1, 1, 1);
+        ImageView fireImage = Obstacle.addFire(30, 1, 1);
         assertNotNull(fireImage);
         assertEquals(30, fireImage.getFitWidth());
         assertEquals(30, fireImage.getFitHeight());
@@ -37,7 +37,7 @@ class ObstacleTest {
 
     @Test
     void testAddPit() throws URISyntaxException {
-        ImageView pitImage = Obstacle.addPit(30, 1, 2, 2);
+        ImageView pitImage = Obstacle.addPit(30,  2, 2);
         assertNotNull(pitImage);
         assertEquals(30, pitImage.getFitWidth());
         assertEquals(30, pitImage.getFitHeight());
@@ -49,7 +49,7 @@ class ObstacleTest {
 
     @Test
     void testAddSpike() throws URISyntaxException {
-        ImageView spikeImage = Obstacle.addSpike(30, 1, 3, 3);
+        ImageView spikeImage = Obstacle.addSpike(30, 3, 3);
         assertNotNull(spikeImage);
         assertEquals(30, spikeImage.getFitWidth());
         assertEquals(30, spikeImage.getFitHeight());
@@ -61,13 +61,13 @@ class ObstacleTest {
 
     @Test
     void testAddTeleport() throws URISyntaxException {
-        ImageView teleportImage = Obstacle.addTeleport(30, 1, 4, 4);
+        ImageView teleportImage = Obstacle.addTeleport(30,  4, 4);
         assertNotNull(teleportImage);
         assertEquals(30, teleportImage.getFitWidth());
         assertEquals(30, teleportImage.getFitHeight());
         assertEquals(120, teleportImage.getTranslateX());
         assertEquals(120, teleportImage.getTranslateY());
-        assertEquals(1, Obstacle.telePortPositions.size());
-        assertEquals(new Pair<>(4, 4), Obstacle.telePortPositions.get(0));
+        assertEquals(1, Obstacle.teleportPositions.size());
+        assertEquals(new Pair<>(4, 4), Obstacle.teleportPositions.get(0));
     }
 }

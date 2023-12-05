@@ -43,6 +43,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>5.6</version> <!-- Check for the latest version on Maven Central -->
+        </dependency>
     </dependencies>
 
     <build>

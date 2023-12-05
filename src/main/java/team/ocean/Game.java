@@ -25,14 +25,14 @@ import java.util.ArrayList;
 public class Game extends Application {
     private Stage mainStage;
     public static final int TILE_SIZE = 60;
-    public static final int WIDTH = 10;
-    public static final int HEIGHT = 10;
+    private int dimension  = PlayerController.customGridLength;
     int rand;
     public Label randResult;
     public boolean player1Turn = false;
     public boolean player2Turn = false;
-    Player player1 = new Player(TILE_SIZE, PlayerController.names.get(0));
-    Player player2 = new Player(TILE_SIZE, PlayerController.names.get(1));
+
+    Player player1 = new Player(TILE_SIZE, dimension, PlayerController.names.get(0));
+    Player player2 = new Player(TILE_SIZE, dimension, PlayerController.names.get(1));
     public boolean gameStart = false;
     public Button gameButton;
     private Group tileGroup = new Group();
@@ -40,11 +40,11 @@ public class Game extends Application {
     //Methods
     private Parent createContent() throws URISyntaxException {
         Pane root = new Pane();
-        root.setPrefSize(TILE_SIZE * WIDTH + TILE_SIZE, TILE_SIZE * HEIGHT);
+        root.setPrefSize(TILE_SIZE * dimension + TILE_SIZE, TILE_SIZE * dimension);
         root.getChildren().addAll(tileGroup);
 
-        for (int i = 0; i < HEIGHT; i++) {
-            for (int j = 0; j < WIDTH; j++) {
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
                 Color color = ((i + j) % 2 == 0 ? Color.LIGHTGREY : Color.DIMGRAY);
 
                 Tile tile = new Tile(TILE_SIZE, TILE_SIZE, color);
@@ -53,7 +53,7 @@ public class Game extends Application {
 
                 tileGroup.getChildren().add(tile);
                 // Calculate the position number for each rectangle
-                int positionNumber = i * WIDTH + j + 1;
+                int positionNumber = i * dimension + j + 1;
                 System.out.print(positionNumber + " ");
             }
             System.out.println();
@@ -61,7 +61,7 @@ public class Game extends Application {
 
         Button button1 = new Button(PlayerController.names.get(0));
         button1.setTranslateX(TILE_SIZE * 1);
-        button1.setTranslateY(TILE_SIZE * 10 + (double) TILE_SIZE / 2);
+        button1.setTranslateY(TILE_SIZE * dimension + (double) TILE_SIZE / 2);
         button1.setOnAction(e -> {
             if (player1Turn) {
                 if (player1.ifMissTurn()) {
@@ -86,7 +86,7 @@ public class Game extends Application {
 
         Button button2 = new Button(PlayerController.names.get(1));
         button2.setTranslateX(TILE_SIZE * 8);
-        button2.setTranslateY(TILE_SIZE * 10 + (double) TILE_SIZE / 2);
+        button2.setTranslateY(TILE_SIZE * dimension + (double) TILE_SIZE / 2);
         button2.setOnAction(e -> {
             if (player2Turn) {
                 if (player2.ifMissTurn()) {
@@ -112,11 +112,11 @@ public class Game extends Application {
 
         randResult = new Label("Rolled Dice : ");
         randResult.setTranslateX(TILE_SIZE * 4);
-        randResult.setTranslateY(TILE_SIZE * 10 + (double) TILE_SIZE / 2);
+        randResult.setTranslateY(TILE_SIZE * dimension + (double) TILE_SIZE / 2);
 
         gameButton = new Button("Start Game");
         gameButton.setTranslateX(TILE_SIZE * 4);
-        gameButton.setTranslateY(TILE_SIZE * 10 + (double) TILE_SIZE);
+        gameButton.setTranslateY(TILE_SIZE * dimension + (double) TILE_SIZE);
         gameButton.setOnAction(e -> {
             if (!gameStart) {
                 gameButton.setText("Game started");
