@@ -60,32 +60,25 @@ public class Game extends Application {
         }
 
         Button button1 = new Button(PlayerController.names.get(0));
-        button1.setTranslateX(0);
-        button1.setTranslateY(TILE_SIZE * 11 + (double) TILE_SIZE / 2);
+        button1.setTranslateX(TILE_SIZE * 1);
+        button1.setTranslateY(TILE_SIZE * 10 + (double) TILE_SIZE / 2);
         button1.setOnAction(e -> {
             if (player1Turn) {
                 if (player1.ifMissTurn()) {
                     player1.setMissTurn(false);
-                    showAlert("Alert", player1.getName() + " missed his chance", 3);
+                    showAlert("Alert", player1.getName() + " missed his/her chance", 3);
                 } else {
                     getDiceValue();
-                    randResult.setText(String.valueOf(rand));
-                    boolean ifWon = player1.updatePlayerPosition(rand);
-                    if (ifWon) {
-                        showAlert("Congratulations!! ", player2.getName() + " won the game", 5);
+                    randResult.setText("Rolled Dice : " + String.valueOf(rand));
+                    player1.addScore(rand);
+                    player1.updatePlayerPosition(rand, player2.getxPos(), player2.getyPos());
+                    if (player1.ifWonGame()) {
+                        HighScore obj = new HighScore();
+                        obj.writeScore(player1.getName(), player1.getScore());
+                        showAlert("Congratulations!! ", player1.getName() + " won the game, Well done!!", 5);
                         mainStage.close();
                     }
-                    System.out.println("Player1 x:" + player1.getxPos() + " y:" + player1.getyPos());
-                    translatePlayer(player1.getxPos(), player1.getyPos(), player1.getObj());
-                    for (Pair pair : Obstacle.pitPositions) {
-                        if (pair.getKey().equals(player1.getxPos()) && pair.getValue().equals(player1.getyPos())) {
-                            player1.setPosition(0, 0);
-                            translatePlayer(player1.getxPos(), player1.getyPos(), player1.getObj());
-                        }
-                    }
-                    randResult.setText(String.valueOf(rand));
                 }
-                //test
                 player1Turn = false;
                 player2Turn = true;
             }
@@ -93,28 +86,23 @@ public class Game extends Application {
 
         Button button2 = new Button(PlayerController.names.get(1));
         button2.setTranslateX(TILE_SIZE * 8);
-        button2.setTranslateY(TILE_SIZE * 11 + (double) TILE_SIZE / 2);
+        button2.setTranslateY(TILE_SIZE * 10 + (double) TILE_SIZE / 2);
         button2.setOnAction(e -> {
             if (player2Turn) {
                 if (player2.ifMissTurn()) {
                     player2.setMissTurn(false);
-                    showAlert("Alert", player1.getName() + " missed his chance", 3);
+                    showAlert("Alert", player2.getName() + " missed his/her chance", 3);
                 } else {
                     getDiceValue();
-                    randResult.setText(String.valueOf(rand));
-                    boolean ifWon = player2.updatePlayerPosition(rand);
-                    if (ifWon) {
-                        showAlert("Congratulations!! ", player2.getName() + " won the game", 5);
+                    player2.addScore(rand);
+                    randResult.setText("Rolled Dice : " + String.valueOf(rand));
+                    player2.updatePlayerPosition(rand, player1.getxPos(), player1.getyPos());
+                    if (player2.ifWonGame()) {
+                        HighScore obj = new HighScore();
+                        obj.writeScore(player2.getName(), player2.getScore());
+                        showAlert("Congratulations!! ", player2.getName() + " won the game, Well done!!", 5);
                         mainStage.close();
                     }
-                    translatePlayer(player2.getxPos(), player2.getyPos(), player2.getObj());
-                    for (Pair pair : Obstacle.pitPositions) {
-                        if (pair.getKey().equals(player2.getxPos()) && pair.getValue().equals(player2.getyPos())) {
-                            player2.setPosition(0, 0);
-                            translatePlayer(player2.getxPos(), player2.getyPos(), player2.getObj());
-                        }
-                    }
-                    randResult.setText(String.valueOf(rand));
                 }
                 //test
                 player2Turn = false;
@@ -122,9 +110,13 @@ public class Game extends Application {
             }
         });
 
+        randResult = new Label("Rolled Dice : ");
+        randResult.setTranslateX(TILE_SIZE * 4);
+        randResult.setTranslateY(TILE_SIZE * 10 + (double) TILE_SIZE / 2);
+
         gameButton = new Button("Start Game");
-        gameButton.setTranslateX(TILE_SIZE * 5);
-        gameButton.setTranslateY(TILE_SIZE * 11 + (double) TILE_SIZE / 2);
+        gameButton.setTranslateX(TILE_SIZE * 4);
+        gameButton.setTranslateY(TILE_SIZE * 10 + (double) TILE_SIZE);
         gameButton.setOnAction(e -> {
             if (!gameStart) {
                 gameButton.setText("Game started");
@@ -133,20 +125,25 @@ public class Game extends Application {
             }
         });
 
-        randResult = new Label("0");
-        randResult.setTranslateX(TILE_SIZE * 4);
-        randResult.setTranslateY(TILE_SIZE * 11 + (double) TILE_SIZE / 2);
+        ImageView fire1 = Obstacle.addFire(TILE_SIZE,  1, 1);
+        ImageView fire2 = Obstacle.addFire(TILE_SIZE, 8, 9);
+        ImageView fire3 = Obstacle.addFire(TILE_SIZE, 8, 9);
+        ImageView spike1 = Obstacle.addSpike(TILE_SIZE,  2, 2);
+        ImageView spike2 = Obstacle.addSpike(TILE_SIZE,  3, 2);
+        ImageView spike3 = Obstacle.addSpike(TILE_SIZE,  4, 2);
+        ImageView spike4 = Obstacle.addSpike(TILE_SIZE,  5, 2);
+        ImageView spike5 = Obstacle.addSpike(TILE_SIZE,  7, 8);
+        ImageView spike6 = Obstacle.addSpike(TILE_SIZE,  8, 8);
+        ImageView spike7 = Obstacle.addSpike(TILE_SIZE,  9, 8);
+        ImageView teleport1 = Obstacle.addTeleport(TILE_SIZE, 7, 1);
+        ImageView teleport2 = Obstacle.addTeleport(TILE_SIZE, 1, 5);
+        ImageView pit1 = Obstacle.addPit(TILE_SIZE,  6, 1);
+        ImageView pit2 = Obstacle.addPit(TILE_SIZE,  9, 3);
+        ImageView pit3 = Obstacle.addPit(TILE_SIZE, 3, 5);
+        ImageView pit4 = Obstacle.addPit(TILE_SIZE, 2, 8);
 
-        ImageView fire1 = Obstacle.addFire(TILE_SIZE, 1, 1, 1);
-        ImageView fire2 = Obstacle.addFire(TILE_SIZE, 1, 8, 9);
-        ImageView spike1 = Obstacle.addSpike(TILE_SIZE, 1, 2, 1);
-        ImageView spike2 = Obstacle.addSpike(TILE_SIZE, 1, 3, 1);
-        ImageView teleport1 = Obstacle.addTeleport(TILE_SIZE, 1, 7, 1);
-        ImageView teleport2 = Obstacle.addTeleport(TILE_SIZE, 1, 6, 5);
-        ImageView pit1 = Obstacle.addPit(TILE_SIZE, 1, 6, 1);
-        ImageView pit2 = Obstacle.addPit(TILE_SIZE, 1, 6, 9);
 
-        tileGroup.getChildren().addAll(player1.getObj(), player2.getObj(), button1, button2, gameButton, randResult, fire1, fire2, spike1, spike2, teleport1, teleport2, pit1, pit2);
+        tileGroup.getChildren().addAll(button1, button2, gameButton, randResult, fire1, fire2, fire3, spike1, spike2, spike3, spike4, spike5, spike6, spike7, teleport1, teleport2, pit1, pit2, pit3, pit4, player1.getObj(), player2.getObj());
 
         return root;
     }
@@ -155,15 +152,8 @@ public class Game extends Application {
         rand = (int) (Math.random() * 9 + 1);
     }
 
-    private void translatePlayer(int x, int y, Circle b) {
-        TranslateTransition animate = new TranslateTransition(Duration.millis(100), b);
-        animate.setToX(x * TILE_SIZE + (double) TILE_SIZE / 2);
-        animate.setToY(y * TILE_SIZE + (double) TILE_SIZE / 2);
-        animate.setAutoReverse(false);
-        animate.play();
-    }
 
-    private void showAlert(String message, String alertMsg, int duration) {
+    public static void showAlert(String message, String alertMsg, int duration) {
         Stage window = new Stage();
         window.setTitle(message);
         window.setMinWidth(250);
@@ -186,7 +176,7 @@ public class Game extends Application {
     @Override
     public void start(Stage stage) throws IOException, URISyntaxException {
         mainStage = stage;
-        Scene scene = new Scene(createContent(), 800, 800);
+        Scene scene = new Scene(createContent(), 1080, 1080);
         stage.setTitle("Ocean");
         stage.setScene(scene);
         stage.setMaximized(true);

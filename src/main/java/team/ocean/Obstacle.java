@@ -34,23 +34,23 @@ public class Obstacle {
     }
     public static ArrayList<Pair<Integer, Integer>> firePositions = new ArrayList<>();
     public static ArrayList<Pair<Integer, Integer>> spikePositions = new ArrayList<>();
-    public static ArrayList<Pair<Integer, Integer>> telePortPositions = new ArrayList<>();
+    public static ArrayList<Pair<Integer, Integer>> teleportPositions = new ArrayList<>();
     public static ArrayList<Pair<Integer, Integer>> pitPositions = new ArrayList<>();
 
-    public static ImageView addFire(int size, int length, int xPos, int yPos) throws URISyntaxException {
+    public static ImageView addFire(int size, int xPos, int yPos) throws URISyntaxException {
         firePositions.add(new Pair<>(xPos,yPos));
-        return create(Type.FIRE, size, length, xPos, yPos);
+        return create(Type.FIRE, size, 1, xPos, yPos);
     }
-    public static ImageView addPit(int size, int length, int xPos, int yPos) throws URISyntaxException {
+    public static ImageView addPit(int size, int xPos, int yPos) throws URISyntaxException {
         pitPositions.add(new Pair<>(xPos,yPos));
-        return create(Type.HOLE, size, length, xPos, yPos);
+        return create(Type.HOLE, size, 1, xPos, yPos);
     }
-    public static ImageView addSpike(int size, int length, int xPos, int yPos) throws URISyntaxException {
+    public static ImageView addSpike(int size, int xPos, int yPos) throws URISyntaxException {
         spikePositions.add(new Pair<>(xPos,yPos));
-        return create(Type.SPIKE, size, length, xPos, yPos);
+        return create(Type.SPIKE, size, 1, xPos, yPos);
     }
-    public static ImageView addTeleport(int size, int length, int xPos, int yPos) throws URISyntaxException {
-        telePortPositions.add(new Pair<>(xPos,yPos));
-        return create(Type.TELEPORT, size, length, xPos, yPos);
+    public static ImageView addTeleport(int size, int xPos, int yPos) throws URISyntaxException {
+        teleportPositions.add(new Pair<>(xPos,yPos));
+        return create(Type.TELEPORT, size, 1, xPos, yPos);
     }
 }

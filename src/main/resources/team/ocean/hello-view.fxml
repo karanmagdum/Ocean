@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="720.0" prefWidth="1280.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="team.ocean.HelloController">
+<VBox alignment="CENTER" prefHeight="720.0" prefWidth="1280.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="team.ocean.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
+   <Label layoutX="90.0" layoutY="75.0" text="WELCOME TO THE SIMON'S GAME" />
+   <TextArea prefHeight="180.0" prefWidth="200.0" text="Rules and Instructions&#10;1. Please enter the names of the players in the next window&#10;2. In the Game, you need to press &quot;Start Game&quot; to begin the game.&#10;3. The players will get their turns alternately, so corresponding player will only work.&#10;4. Obstacles -&#10;     Fire - Will make you miss your turn&#10;     Galaxy - WIll make you start from the initial position&#10;     Knives - Should be jumped, otherwise player cannot make a move&#10;     Teleport -  Will teleport the player to other teleport instance." />
     <Button onAction="#onHelloButtonClick" text="Click to Start!" />
     <Label fx:id="welcomeText" />
    <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" />

@@ -3,13 +3,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="team.ocean.PlayerController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/fxml/1" xmlns:fx="http://javafx.com/javafx/17.0.2-ea" fx:controller="team.ocean.PlayerController">
    <children>
-      <TextField fx:id="playerOne" layoutX="340.0" layoutY="75.0" />
-      <TextField fx:id="playerTwo" layoutX="340.0" layoutY="150.0" />
       <Label layoutX="90.0" layoutY="75.0" text="Enter Player One name" />
       <Label layoutX="90.0" layoutY="150.0" text="Enter Player Two name" />
-      <Label layoutX="130.0" layoutY="300.0" text="High Score" />
+      <TextField fx:id="playerOne" layoutX="340.0" layoutY="75.0" />
+      <TextField fx:id="playerTwo" layoutX="340.0" layoutY="150.0" />
+      <Label fx:id="HighScore" layoutX="90.0" layoutY="300.0" text="High Score" />
       <Button fx:id="beginButton" layoutX="400.0" layoutY="210.0" mnemonicParsing="false" onAction="#onHelloButtonClick" text="Begin" />
    </children>
 </AnchorPane>
