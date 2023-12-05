@@ -13,40 +13,100 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.util.Pair;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 
+import static team.ocean.Player.Direction;
+
+/**
+ * The Game class represents the main application for the game.
+ * It extends the JavaFX Application class and is responsible for
+ * initializing and managing the graphical user interface and the game play.
+ */
 public class Game extends Application {
-    private Stage mainStage;
-    public static final int TILE_SIZE = 60;
+
+    /**
+     * The main stage of the application.
+     */
+    public Stage mainStage;
+
+    /**
+     * The size of each game tile.
+     */
+    public static final int TILE_SIZE = 40;
+
+    /**
+     * The height and width of the game board.
+     */
     private int dimension  = PlayerController.customGridLength;
+
+    /**
+     * The dice roll value from 1 to 9.
+     */
     int rand;
+
+    /**
+     * The placeholder for showing the random dice roll value.
+     */
     public Label randResult;
+
+    /**
+     * Flag indicating whether it is player 1's turn.
+     */
     public boolean player1Turn = false;
+
+    /**
+     * Flag indicating whether it is player 2's turn.
+     */
     public boolean player2Turn = false;
 
+    /**
+     * Player 1 instance.
+     */
     Player player1 = new Player(TILE_SIZE, dimension, PlayerController.names.get(0));
+
+    /**
+     * Player 2 instance.
+     */
     Player player2 = new Player(TILE_SIZE, dimension, PlayerController.names.get(1));
+
+    /**
+     * Flag indicating whether the game has started.
+     */
     public boolean gameStart = false;
+
+    /**
+     * Button to start the game.
+     */
     public Button gameButton;
+
+    /**
+     * Group to hold the game tiles.
+     */
     private Group tileGroup = new Group();
 
-    //Methods
+    private int finalCoordinateX = 0;
+    private int finalCoordinateY = 0;
+
+    /**
+     * Creates the content for the game scene.
+     *
+     * @return The root parent node for the game scene.
+     * @throws URISyntaxException If there is an issue with resource URIs.
+     */
     private Parent createContent() throws URISyntaxException {
         Pane root = new Pane();
         root.setPrefSize(TILE_SIZE * dimension + TILE_SIZE, TILE_SIZE * dimension);
         root.getChildren().addAll(tileGroup);
-
+        findEndCoordinates();
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
                 Color color = ((i + j) % 2 == 0 ? Color.LIGHTGREY : Color.DIMGRAY);
-
+                if((i==0 && j==0) || (i==finalCoordinateY && j==finalCoordinateX))
+                    color = Color.LIGHTGREEN;
                 Tile tile = new Tile(TILE_SIZE, TILE_SIZE, color);
                 tile.setTranslateX(j * TILE_SIZE);
                 tile.setTranslateY(i * TILE_SIZE);
@@ -54,9 +114,7 @@ public class Game extends Application {
                 tileGroup.getChildren().add(tile);
                 // Calculate the position number for each rectangle
                 int positionNumber = i * dimension + j + 1;
-                System.out.print(positionNumber + " ");
             }
-            System.out.println();
         }
 
         Button button1 = new Button(PlayerController.names.get(0));
@@ -105,7 +163,7 @@ public class Game extends Application {
                     }
                 }
                 //test
-                player2Turn = false;
+                player2Turn = true;
                 player1Turn = true;
             }
         });
@@ -148,11 +206,20 @@ public class Game extends Application {
         return root;
     }
 
-    private void getDiceValue() {
+    /**
+     * Generates a random value for the dice roll.
+     */
+    public void getDiceValue() {
         rand = (int) (Math.random() * 9 + 1);
     }
 
-
+    /**
+     * Displays a timed alert message.
+     *
+     * @param message   The title of the alert.
+     * @param alertMsg  The content of the alert message.
+     * @param duration  The duration (in seconds) for the alert to be displayed.
+     */
     public static void showAlert(String message, String alertMsg, int duration) {
         Stage window = new Stage();
         window.setTitle(message);
@@ -173,8 +240,64 @@ public class Game extends Application {
         wait.play();
     }
 
+    public void findEndCoordinates(){
+        int minRow=1;
+        int maxRow=dimension;
+        int minCol=0;
+        int maxCol=dimension;
+        Player.Direction dir = Direction.RIGHT;
+        for(int i=0;i<10000;i++){
+
+            if(minRow == maxRow && minCol == maxCol) {
+                break;
+
+            }
+            switch(dir) {
+                case RIGHT:
+                    finalCoordinateY++;
+                    break;
+                case DOWN:
+                    finalCoordinateX++;
+                    break;
+                case LEFT:
+                    finalCoordinateY--;
+                    break;
+                case UP:
+                    finalCoordinateX--;
+                    break;
+            }
+
+            // Toggle direction
+            if(dir == Direction.RIGHT && finalCoordinateY == maxCol-1) {
+                dir = Direction.DOWN;
+                maxCol--;
+            }
+            else if(dir == Direction.DOWN && finalCoordinateX == maxRow-1) {
+                dir = Direction.LEFT;
+                maxRow--;
+            }
+            else if(dir == Direction.LEFT && finalCoordinateY == minCol) {
+                dir = Direction.UP;
+                minCol++;
+            }
+            else if(dir == Direction.UP && finalCoordinateX == minRow) {
+                dir = Direction.RIGHT;
+                minRow++;
+            }
+
+        }
+    }
+
+    /**
+     * Starts the game application.
+     *
+     * @param stage The primary stage for this application.
+     * @throws IOException        If there is an issue with loading resources.
+     * @throws URISyntaxException If there is an issue with resource URIs.
+     */
     @Override
     public void start(Stage stage) throws IOException, URISyntaxException {
+
         mainStage = stage;
         Scene scene = new Scene(createContent(), 1080, 1080);
         stage.setTitle("Ocean");

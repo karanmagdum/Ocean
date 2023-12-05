@@ -9,7 +9,7 @@
       <Label layoutX="90.0" layoutY="150.0" text="Enter Player Two name" />
       <TextField fx:id="playerOne" layoutX="370.0" layoutY="100.0" />
       <TextField fx:id="playerTwo" layoutX="370.0" layoutY="150.0" />
-      <Label layoutX="90.0" layoutY="200.0" text="Enter the Board Layout(Default Grid Length = 10)" />
+      <Label layoutX="90.0" layoutY="200.0" text="Enter the Board Layout(10..20)" />
       <TextField fx:id="dimension" layoutX="370.0" layoutY="200.0" />
       <Label fx:id="HighScore" layoutX="90.0" layoutY="300.0" text="High Score" />
       <Button fx:id="beginButton" layoutX="400.0" layoutY="300.0" mnemonicParsing="false" onAction="#onHelloButtonClick" text="Begin" />

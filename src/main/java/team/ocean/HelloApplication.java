@@ -7,8 +7,21 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The main application class for Team Ocean's application.
+ * Extends JavaFX's Application class and serves as the entry point for the application.
+ */
 public class HelloApplication extends Application {
+
+    /** The main stage of the application. */
     private static Stage mainStage;
+
+    /**
+     * Start method called when the application is launched.
+     *
+     * @param stage The primary stage for the application.
+     * @throws IOException If there is an error loading the FXML file.
+     */
     @Override
     public void start(Stage stage) throws IOException {
         mainStage = stage;
@@ -20,10 +33,20 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
+    /**
+     * Gets the main stage of the application.
+     *
+     * @return The main stage.
+     */
     public static Stage getMainStage() {
         return mainStage;
     }
 
+    /**
+     * The entry point of the application.
+     *
+     * @param args The command-line arguments (not used in this application).
+     */
     public static void main(String[] args) {
         /*launch();*/
         Application.launch();
