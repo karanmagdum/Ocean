@@ -163,7 +163,7 @@ public class Game extends Application {
                     }
                 }
                 //test
-                player2Turn = true;
+                player2Turn = false;
                 player1Turn = true;
             }
         });

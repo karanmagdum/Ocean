@@ -268,9 +268,6 @@ public class Player {
             minCol--;
         }
 
-        System.out.println("x and y"+currentXPos+" "+currentYPos);
-
-
         if(currentXPos == xRef && currentYPos== yRef){
             Game.showAlert("Alert", getName()+" cannot be moved to other player's position", 3);
             return;

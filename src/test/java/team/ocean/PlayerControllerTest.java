@@ -38,12 +38,14 @@ class PlayerControllerTest {
         // Arrange
         TextField playerOneTextField = robot.lookup("#playerOne").query();
         TextField playerTwoTextField = robot.lookup("#playerTwo").query();
+        TextField dimension = robot.lookup("#dimension").query();
         Button beginButton = robot.lookup("#beginButton").query();
 
         // Act
         robot.interact(() -> {
             playerOneTextField.setText("Player One");
             playerTwoTextField.setText("Player Two");
+            dimension.setText("10");
             beginButton.fire();
         });
 
@@ -68,5 +70,6 @@ class PlayerControllerTest {
         assertEquals(2, PlayerController.names.size());
         assertEquals("Player One", PlayerController.names.get(0));
         assertEquals("Player Two", PlayerController.names.get(1));
+        assertEquals(10, PlayerController.customGridLength);
     }
 }

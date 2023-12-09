@@ -9,7 +9,7 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <Label layoutX="90.0" layoutY="75.0" text="WELCOME TO THE SIMON'S GAME" />
-   <TextArea prefHeight="180.0" prefWidth="200.0" text="Rules and Instructions&#10;1. Please enter the names of the players in the next window&#10;2. In the Game, you need to press &quot;Start Game&quot; to begin the game.&#10;3. The players will get their turns alternately, so corresponding player will only work.&#10;4. Obstacles -&#10;     Fire - Will make you miss your turn&#10;     Galaxy - WIll make you start from the initial position&#10;     Knives - Should be jumped, otherwise player cannot make a move&#10;     Teleport -  Will teleport the player to other teleport instance." />
+   <TextArea editable="false" prefHeight="180.0" prefWidth="200.0" text="Rules and Instructions&#10;1. Please enter the names of the players in the next window&#10;2. In the Game, you need to press &quot;Start Game&quot; to begin the game.&#10;3. The players will get their turns alternately, so corresponding player will only work.&#10;4. Obstacles -&#10;     Fire - Will make you miss your turn&#10;     Galaxy - WIll make you start from the initial position&#10;     Knives - Should be jumped, otherwise player cannot make a move&#10;     Teleport -  Will teleport the player to other teleport instance. &#10;5. Two players cannot stay on same tile at any moment." />
     <Button onAction="#onHelloButtonClick" text="Click to Start!" />
     <Label fx:id="welcomeText" />
    <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" />
